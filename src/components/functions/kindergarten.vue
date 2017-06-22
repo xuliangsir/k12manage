@@ -177,12 +177,14 @@
                 this.dialogVisible = false
 
                 if (tag === 0 && this.dialogUsage == 0) {
+                    this.form.id = 1
                     this.tableData.push(this.form)
+                    // this.$set(this.tableData,)
                 }
 
                 if (tag === 0 && this.dialogUsage == 1) {
-                    this.tableData[this.dialogIndex].name = this.form.name
-                    this.tableData[this.dialogIndex].description = this.form.description
+                    // this.tableData.splice(this.dialogIndex, 1, this.form)
+                    this.$set(this.tableData, this.dialogIndex, this.form)
                 }
 
                 this.form = {}
