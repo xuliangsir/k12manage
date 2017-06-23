@@ -13,12 +13,21 @@
                 </el-table-column>
                 <el-table-column prop="description" label="描述">
                 </el-table-column>
+
+                <el-table-column label="年级相关" width="150">
+                    <template scope="scope">
+                        <el-button size="small" @click="editGrade(scope.$index, scope.row)">年级</el-button>
+                    </template>
+                </el-table-column>
+
+
                 <el-table-column label="操作" width="150">
                     <template scope="scope">
                         <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                         <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
+
             </el-table>
         </div>
 
@@ -31,7 +40,7 @@
 
 
 
-        <el-dialog title="添加条目" :visible.sync="dialogVisible" :before-close="handleClose" class="dialogSzie">
+        <el-dialog title="添加条目" :visible.sync="dialogVisible" :before-close="handleClose(dialogVisible)" class="dialogSzie">
 
             <el-form ref="form" :model="form" label-width="80px">
                 <el-form-item label="校名">
@@ -46,6 +55,37 @@
             <span slot="footer" class="dialog-footer">
                 <el-button @click="isAdd(1)" >关 闭</el-button>
                 <el-button @click="isAdd(0)" type="primary">确 定</el-button>
+            </span>
+
+        </el-dialog>
+
+
+        <el-dialog title="年级操作" :visible.sync="GradeDialog" :before-close="handleClose(GradeDialog)" class="dialogSzie">
+
+            <el-form ref="form" :model="form" label-width="80px">
+                <el-form-item label="校名">
+                    <div v-for="(item,index) in gradeList">
+                        <div class="grade">年级：{{item.grade}}，描述： {{item.description}} <span class="del" @click="resetGrade(index)">X</span></div>
+                    </div>
+                </el-form-item>
+                <el-form-item label="新增">
+                    <div class="line">
+                        <el-input v-model="newGrade" placeholder="请输入年级"></el-input>
+                    </div>
+                    <div class="line">
+                        <el-input v-model="newDescription" placeholder="请输入描述"></el-input>
+                    </div>
+                    <div class="line">
+                        <el-button type="primary" @click="addG">确定</el-button>
+                    </div>
+                </el-form-item>
+            </el-form>
+
+
+
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="GisAdd(1)" >关 闭</el-button>
+                <el-button @click="GisAdd(0)" type="primary">确 定</el-button>
             </span>
 
         </el-dialog>
@@ -90,10 +130,19 @@
                         "description": "xuliang test_6"
                     },
                 ],
-                dialogVisible: false,
+
+
+
+                dialogVisible: false, // 学校
                 dialogUsage: 0, // 0 新增 1编辑
                 dialogIndex: '',
 
+
+                GradeDialog: false, // 年级 
+                GradeUsage: 0, // 0 新增 1编辑
+                GradeIndex: '',
+
+                isResetG: false, // dialog内修改年级
 
 
                 showSize: 10,
@@ -102,8 +151,31 @@
 
                 form: {
                     name: '',
-                    description: ''
-                }
+                    description: '',
+                },
+
+                gradeList: [{
+                    grade: '1年级',
+                    description: 'descriptio——1年级'
+                }, {
+                    grade: '2年级',
+                    description: 'descriptio——2年级'
+                }, {
+                    grade: '3年级',
+                    description: 'descriptio——3年级'
+                }, {
+                    grade: '4年级',
+                    description: 'descriptio——4年级'
+                }, {
+                    grade: '5年级',
+                    description: 'descriptio——5年级'
+                }, {
+                    grade: '6年级',
+                    description: 'descriptio——6年级'
+                }],
+                newGrade: '',
+                newDescription: '',
+
 
             }
         },
@@ -125,7 +197,7 @@
                     //     "name": "xuliang"
                     // },
                     headers: {
-                        'content-type': "multipart/form-data",
+                        // 'content-type': "multipart/form-data",
                         'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmZW5naHVhLndhbmciLCJ0eXBlIjoiTUFOQUdFUiIsIm1vYmlsZSI6IjEzNzE2MTQ5NDQzIiwiZXhwIjoxNDk5NjcxMTE1fQ.QpQ6mNS60DMLgfoEyq9RO4IlvRgvgi1lrZa7uNSu94_OefI6Swft9TMAKSpzQJ0nL6SNJpPmHnI8spOCQ6xosg'
 
                     }
@@ -143,9 +215,8 @@
 
                 })
             },
-            handleClose() {
-                this.dialogVisible = false
-                // this.path = null
+            handleClose(dialogName) {
+                this[dialogName] = false
             },
             showDialog(path) {
                 // this.path = path
@@ -179,16 +250,17 @@
                 if (tag === 0 && this.dialogUsage == 0) {
                     this.form.id = 1
                     this.tableData.push(this.form)
-                    // this.$set(this.tableData,)
                 }
 
                 if (tag === 0 && this.dialogUsage == 1) {
-                    // this.tableData.splice(this.dialogIndex, 1, this.form)
                     this.$set(this.tableData, this.dialogIndex, this.form)
                 }
 
                 this.form = {}
 
+            },
+            GisAdd(tag) { // 0 添加    1 取消
+                this.GradeDialog = false
             },
             addItem() {
 
@@ -218,6 +290,25 @@
                     }
 
                 })
+            },
+            editGrade(row, index) {
+                this.GradeDialog = true
+
+            },
+            resetGrade(index) {
+                this.isResetG = true
+
+                this.gradeList.splice(index, 1)
+
+            },
+            addG() {
+                this.gradeList.push({
+                    grade: this.newGrade,
+                    description: this.newDescription
+
+                })
+                this.newGrade = ''
+                this.newDescription = ''
             }
         },
         beforeMount() {
@@ -267,5 +358,21 @@
         width: 100px;
         height: auto;
         margin: 0 auto;
+    }
+
+    .del {
+        padding: 5px;
+        color: red;
+        cursor: pointer;
+        transition: all .3s;
+    }
+
+    .del:hover {
+        background: #333;
+    }
+
+    .grade {
+        padding: 4px;
+        /*border: 1px solid #33cccc;*/
     }
 </style>
