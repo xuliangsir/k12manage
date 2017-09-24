@@ -11,7 +11,7 @@
             </el-col>
             <el-col :span="4" :offset="16">
                 <el-submenu index="1">
-                    <template slot="title">张盈盈</template>
+                    <template slot="title">{{name}}</template>
                     <el-menu-item index="2-1" @click="toHomeReload">首页</el-menu-item>
                     <el-menu-item index="2-2" @click="setting">设置</el-menu-item>
                     <el-menu-item index="2-3" @click="logout">退出登录</el-menu-item>
@@ -28,7 +28,8 @@ export default {
             activeIndex: '1',
             activeIndex2: '1',
             isShowBread: true,
-            breadcrumb: null
+            breadcrumb: null,
+            name: JSON.parse(localStorage.actor).user.username
         };
     },
     watch: {

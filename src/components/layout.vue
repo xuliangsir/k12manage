@@ -150,9 +150,9 @@
     color: #444;
   }
 
-   ::-webkit-scrollbar {
+   /*::-webkit-scrollbar {
     display: none
-  }
+  }*/
 
   #mainContent{
     z-index: 1;

@@ -2,9 +2,10 @@
   <el-menu class="MenuBarLeft" theme="dark" @open="handleOpen" @close="handleClose">
     <div class="title_box">
       <router-link :to="{path:'/dataStatistics'}">
-        <span class="title"><img class="logo" src="../assets/TIGER-ICO.png" alt="logo">老虎运动</span>
+        <span class="title"><img class="logo" src="../assets/TIGER-ICO.png" alt="logo">管理平台</span>
       </router-link>
     </div>
+    <!--
     <el-submenu index="1">
       <template slot="title"><i class="el-icon-document"></i>数据首页</template>
       <router-link :to="{path:'/dataStatistics'}">
@@ -16,8 +17,10 @@
       <router-link :to="{path:'/userManagement'}">
         <el-menu-item index="2-1" @click="setUnitName('用户管理')">用户管理</el-menu-item>
       </router-link>
-    </el-submenu>
+    </el-submenu>-->
 
+    <!--点击左导航触发'发送面包屑名'的事件-->
+<!--
     <el-submenu index="3">
       <template slot="title"><i class="el-icon-star-off"></i>教练系统</template>
       <router-link :to="{path:'/certifiedCoach/coachList'}">
@@ -25,7 +28,7 @@
       </router-link>
       <router-link :to="{path:'/Authentication/uncertifiedList'}">
         <el-menu-item index="3-2" @click="setUnitName('教练认证')">教练认证</el-menu-item>
-        <!--点击左导航触发'发送面包屑名'的事件-->
+        
       </router-link>
       <router-link :to="{path:'/action/storageAlreadyHave'}">
         <el-menu-item index="3-3" @click="setUnitName('动作库管理')">动作库管理</el-menu-item>
@@ -74,12 +77,86 @@
         <el-menu-item index="9-1" @click="setUnitName('图片浏览')">图片浏览</el-menu-item>
       </router-link>
     </el-submenu>
-    <el-submenu index="10">
-      <template slot="title"><i class="el-icon-picture"></i>幼儿园管理</template>
-      <router-link :to="{path:'/kindergarten'}">
-        <el-menu-item index="9-1" @click="setUnitName('幼儿园管理')">幼儿园管理</el-menu-item>
+     -->
+  
+
+       <el-submenu index="5">
+      <template slot="title"><i class="el-icon-picture"></i>教师管理</template>
+       <router-link :to="{path:'/teachers'}">
+        <el-menu-item index="9-1" @click="setUnitName('教师管理')">教师管理</el-menu-item>
+      </router-link>
+
+      <router-link :to="{path:'/teaching'}">
+        <el-menu-item index="9-1" @click="setUnitName('教师管理')">任命教师管理</el-menu-item>
       </router-link>
     </el-submenu>
+
+      
+    <el-submenu index="5">
+      <template slot="title"><i class="el-icon-picture"></i>班级管理</template>
+
+       <router-link :to="{path:'/klasses'}">
+        <el-menu-item index="9-1" @click="setUnitName('班级管理')">班级管理</el-menu-item>
+      </router-link>
+
+       <router-link :to="{path:'attendanceAdd'}">
+        <el-menu-item index="9-1" @click="setUnitName('班级管理')">添加考勤</el-menu-item>
+      </router-link>
+
+       <router-link :to="{path:'attendance'}">
+        <el-menu-item index="9-1" @click="setUnitName('班级管理')">查询考勤</el-menu-item>
+      </router-link> 
+
+       <router-link :to="{path:'klassplans'}">
+        <el-menu-item index="9-1" @click="setUnitName('班级管理')">班级计划</el-menu-item>
+      </router-link> 
+
+    </el-submenu>
+
+
+
+
+      <router-link :to="{path:'/kindergarten'}">
+        <el-menu-item index="9-1" @click="setUnitName('园区管理')">园区管理</el-menu-item>
+      </router-link>
+
+      <router-link :to="{path:'/cookbook'}">
+        <el-menu-item index="9-1" @click="setUnitName('园区管理')">食谱管理</el-menu-item>
+      </router-link>
+
+
+     <router-link :to="{path:'/kindergarten'}">
+        <el-menu-item index="9-1" @click="setUnitName('年级管理')">年级管理</el-menu-item>
+      </router-link>
+
+
+    
+
+<!--
+      <router-link :to="{path:'/teachers'}">
+        <el-menu-item index="9-1" @click="setUnitName('幼儿园管理')">教师管理</el-menu-item>
+      </router-link>
+      <router-link :to="{path:'/teaching'}">
+        <el-menu-item index="9-1" @click="setUnitName('幼儿园管理')">任命教师管理</el-menu-item>
+      </router-link>-->
+
+      <router-link :to="{path:'/students'}">
+        <el-menu-item index="9-1" @click="setUnitName('学生管理')">学生管理</el-menu-item>
+      </router-link>
+
+       <router-link :to="{path:'/guardian'}">
+        <el-menu-item index="9-1" @click="setUnitName('家长管理')">家长管理</el-menu-item>
+      </router-link>
+
+      <router-link :to="{path:'/courses'}">
+        <el-menu-item index="9-1" @click="setUnitName('课程管理')">课程管理</el-menu-item>
+      </router-link>
+
+       
+
+    </el-submenu>
+
+
   </el-menu>
 </template>
 <script>
@@ -127,6 +204,10 @@
     margin-top: 14px;
     margin-right: 10px;
     margin-bottom: -8px;
+  }
+
+    ::-webkit-scrollbar {
+    display: none
   }
 
 </style>

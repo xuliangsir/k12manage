@@ -14,21 +14,21 @@ Vue.use(apiDefault);
 
 // Vue.component('pic');
 
-router.beforeEach((to,from,next) => {
-  // 验证登陆状态
-  if (localStorage.loginStatus === 'login') {
-    if (to.path === '/login') {
-      return next({path: '/dataStatistics'});
-    }
-    next();
-  } else {
-    if (to.path !== '/login') {
-      return next({path: '/login'});
-    }else {
-      next();
-    }
-  }
-});
+// router.beforeEach((to,from,next) => {
+//   // 验证登陆状态
+//   if (localStorage.loginStatus === 'login') {
+//     if (to.path === '/login') {
+//       return next({path: '/dataStatistics'});
+//     }
+//     next();
+//   } else {
+//     if (to.path !== '/login') {
+//       return next({path: '/login'});
+//     }else {
+//       next();
+//     }
+//   }
+// });
 
 new Vue({
   el: '#app',

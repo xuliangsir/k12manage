@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <span>欢迎使用<br>成虎(北京)科技管理后台(Beta)</span>
+    <span><br>幼儿园智能管理平台</span>
   </div>
 </template>
 <script>
